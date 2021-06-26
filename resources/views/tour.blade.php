@@ -1,4 +1,4 @@
-@extends('layouts.app')	
+@extends('layouts.app-body')
 
 @section('content')
 		<!-- Tour Detail-->
@@ -15,11 +15,11 @@
                                 <span class="m-stars" id="tour-stars">
                                             <!--Star Rating-->
                                     <span class="s-holder">
-                                        <i data-alt="1" class="icon-star-on" title="Excellent"></i> 
-                                        <i data-alt="2" class="icon-star-on" title="Excellent"></i> 
-                                        <i data-alt="3" class="icon-star-on" title="Excellent"></i> 
-                                        <i data-alt="4" class="icon-star-on" title="Excellent"></i> 
-                                        <i data-alt="5" class="icon-star-on" title="Excellent"></i> 
+                                        <i data-alt="1" class="icon-star-on" title="Excellent"></i>
+                                        <i data-alt="2" class="icon-star-on" title="Excellent"></i>
+                                        <i data-alt="3" class="icon-star-on" title="Excellent"></i>
+                                        <i data-alt="4" class="icon-star-on" title="Excellent"></i>
+                                        <i data-alt="5" class="icon-star-on" title="Excellent"></i>
                                     </span>
                                     <i>5.0</i>
                                 </span>
@@ -76,18 +76,18 @@
                                             <div class="offer-content">
                                                 <h3 class="lead">
                                                 {{ trans('messages.from') }}
-                                                </h3>						
+                                                </h3>
                                                 <h1>
                                                     US$ 620
-                                                </h1>	
+                                                </h1>
                                         </div>
                                         <div class="bookbtn">
                                             <a href="book_tour.html" class="a-btn">
                                                 <span>{{ trans('messages.book_now') }}</span>
                                             </a>
-                                            
+
                                         </div>
-                                        
+
                                 </div>
                                 </div>
                             </div>
@@ -113,8 +113,8 @@
                            </p>
                         </div>
                      </div>
-                     
-                     <div class="blog-author">                    
+
+                     <div class="blog-author">
                      </div>
                      <div class="comments-area">
                         <h4>05 {{ trans('messages.comments') }}</h4>
@@ -200,7 +200,7 @@
                   </div>
                   <div class="col-lg-3">
                      <div class="blog_right_sidebar">
-                       
+
                         <aside class="single_sidebar_widget post_category_widget">
                            <h4 class="widget_title">{{ trans('messages.customer_support') }}</h4>
                            <ul class="list cat-list">
@@ -215,7 +215,7 @@
                               </li>
                            </ul>
                         </aside>
-                        
+
                         <aside class="single_sidebar_widget newsletter_widget">
                            <h4 class="widget_title">{{ trans('messages.why_us') }}</h4>
                                 <li>

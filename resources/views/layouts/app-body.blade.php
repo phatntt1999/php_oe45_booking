@@ -21,7 +21,7 @@
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		<link rel="shortcut icon" href="favicon.ico">
-		
+
 		<!-- Animate.css -->
 		<link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet" >
 
@@ -29,7 +29,7 @@
 		<link href="{{ asset('assets/css/icomoon.css') }}" rel="stylesheet" >
 
 		<!-- Bootstrap  -->
-		<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" >
+		<link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet" >
 
 		<!-- Superfish -->
 		<link href="{{ asset('assets/css/superfish.css') }}" rel="stylesheet" >
@@ -43,7 +43,7 @@
 		<!-- CS Select -->
 		<link href="{{ asset('assets/css/cs-select.css') }}" rel="stylesheet" >
 		<link href="{{ asset('assets/css/cs-skin-border.css') }}" rel="stylesheet">
-		
+
 		<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" >
 		<link href="{{ asset('assets/css/style2.css') }}" rel="stylesheet" >
 
@@ -65,7 +65,7 @@
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li class="active"><a href="{{ route('home') }}">{{ trans('messages.home') }}</a></li>
 							<li>
-								<a href="{{ route('destinations.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}</a>
+								<a href="#" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}</a>
 								<ul class="fh5co-sub-menu">
 									<li><a href="#">{{ trans('messages.north') }}</a></li>
 									<li><a href="#">{{ trans('messages.central') }}</a></li>
@@ -83,6 +83,7 @@
 									<li><a href="{{route('language',['vi'])}}">{{ trans('messages.vietnam') }}</a></li>
 								</ul>
 							</li>
+
 						</ul>
 					</nav>
 				</div>
@@ -191,7 +192,7 @@
 						</blockquote>
 						<p class="author">Thao Vy</p>
 					</div>
-					
+
 				</div>
 				<div class="col-md-4">
 					<div class="box-testimony animate-box">
@@ -201,8 +202,8 @@
 						</blockquote>
 						<p class="author">Sun</p>
 					</div>
-					
-					
+
+
 				</div>
 				<div class="col-md-4">
 					<div class="box-testimony animate-box">
@@ -212,7 +213,7 @@
 						</blockquote>
 						<p class="author">Nami</p>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -295,7 +296,7 @@
 	<script src="{{ asset('assets/js/superfish.js') }}"></script>
 
 	<!-- Magnific Popup -->
-	<!-- <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script> -->
+	<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
 	<script src="{{ asset('assets/js/magnific-popup-options.js') }}"></script>
 
 	<!-- Date Picker -->
@@ -303,7 +304,7 @@
 	<!-- CS Select -->
 	<script src="{{ asset('assets/js/classie.js') }}"></script>
 	<script src="{{ asset('assets/js/selectFx.js') }}"></script>
-	
+
 	<!-- Main JS -->
 	<script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
