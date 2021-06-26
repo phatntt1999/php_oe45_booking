@@ -65,7 +65,7 @@
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li class="active"><a href="{{ route('home') }}">{{ trans('messages.home') }}</a></li>
 							<li>
-								<a href="{{ route('destinations') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}</a>
+								<a href="{{ route('destinations.index') }}" class="fh5co-sub-ddown">{{ trans('messages.destinations') }}</a>
 								<ul class="fh5co-sub-menu">
 									<li><a href="#">{{ trans('messages.north') }}</a></li>
 									<li><a href="#">{{ trans('messages.central') }}</a></li>
@@ -295,7 +295,7 @@
 	<script src="{{ asset('assets/js/superfish.js') }}"></script>
 
 	<!-- Magnific Popup -->
-	<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+	<!-- <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script> -->
 	<script src="{{ asset('assets/js/magnific-popup-options.js') }}"></script>
 
 	<!-- Date Picker -->

@@ -230,4 +230,5 @@ return [
 
     ],
 
+    'default_paginate_tour' => '9',
 ];

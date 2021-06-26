@@ -17,4 +17,8 @@ class Tour extends Model
         'cat_tour_id',
         'rating',
     ];
+
+    public function scopeShow($query){
+        return $query->orderBy('created_at', 'desc');
+    }
 }

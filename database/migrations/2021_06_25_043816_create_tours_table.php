@@ -18,10 +18,11 @@ class CreateToursTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
-            $table->string('duration');
+            $table->integer('duration');
             $table->string('num-of-participants');
-            $table->string('cat_tour_id');
+            $table->integer('cat_tour_id');
             $table->float('rating');
+            $table->string('price');
         });
     }
 
