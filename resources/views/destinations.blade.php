@@ -1,4 +1,4 @@
-@extends('layouts.app')	
+@extends('layouts.app-body')
 
 @section('content')
 		<!-- Destinations -->

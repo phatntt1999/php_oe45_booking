@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tour;
+
 class TourController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class TourController extends Controller
      */
     public function create()
     {
-        //
+        return __METHOD__;
     }
 
     /**
