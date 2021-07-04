@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category_tour;
+use App\Models\CategoryTour;
 use Illuminate\Http\Request;
 use App\Models\Tour;
 
@@ -34,7 +34,7 @@ class ListTourController extends Controller
      */
     public function create()
     {
-        $cat_tour = Category_tour::all();
+        $cat_tour = CategoryTour::all();
 
         return view('admin.createTour', [
             'cat_tour' => $cat_tour,
@@ -88,7 +88,7 @@ class ListTourController extends Controller
     public function edit($id)
     {
         $tour = Tour::find($id);
-        $cat_tour = Category_tour::all();
+        $cat_tour = CategoryTour::all();
 
         return view('admin.editTour', [
             'tour' => $tour,

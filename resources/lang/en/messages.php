@@ -13,6 +13,7 @@ return [
     'category' => 'Category',
     'when' => 'When',
     'duration' => 'Duration',
+    'price' => 'Price',
     'min_price' => 'Min Price',
     'max_price' => 'Max Price',
     'search' => 'Search',
@@ -103,9 +104,12 @@ return [
     'manage_profile' => 'Manage Profile',
     'logout' => 'Logout',
     'err_img' => 'This is not an image.',
-    'booking_form' => 'Booking Form',
+    'booking_form' => 'Booking Confirmation',
     'quantity' => 'Quantity',
     'date_start' => 'Date Start',
     'total' => 'Total',
-    'booking' => 'Booking'
+    'booking' => 'Booking',
+    'payment' => 'Payment',
+    'day' => 'day',
+    'night' => 'night',
 ];

@@ -13,22 +13,32 @@
             <div class="modal-body modal-body-step-1 is-showing">
                 <div class="title">{{ trans('messages.booking_form') }}</div>
                 <div class="description">
-                    <h3>Ha Long 3 Ngay 2 Dem</h3>
-                    <h3>Gia tour: ${{ $selectedTour->price }}</h3>
+                    <h2><b>Ha Long
+                        {{ $selectedTour->duration }} {{ trans('messages.day') }}
+                        {{ $selectedTour->duration - 1 }} {{ trans('messages.night') }}</b></h2>
+                    <h3>{{ trans('messages.price') }}: ${{ $selectedTour->price }}</h3>
+                    <h4>{{ trans('messages.duration') }}:
+                        {{ $selectedTour->duration }} {{ trans('messages.day') }}
+                         {{ $selectedTour->duration - 1 }} {{ trans('messages.night') }}</h4>
 
                 </div>
-                <form class="book_form">
-                    {{ trans('messages.username') }}<input type="text" value="{{ $user->name }}" readonly />
-                    Email<input type="email" value="{{ $user->email }}" readonly />
+                <form class="book_form" action="{{ route('storeBookingTour') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="totalPrice" id="totalPrice" value="{{ $selectedTour->price }}">
+                    <input type="hidden" name="tourId" value="{{ $selectedTour->id }}">
+                    <input type="hidden" name="duration" value="{{ $selectedTour->duration }}">
+
+                    {{ trans('messages.username') }}<input type="text" name="username" value="{{ $user->name }}" readonly />
+                    Email<input type="email"name="email"  value="{{ $user->email }}" readonly />
                     {{ trans('messages.quantity') }} <input type="number"
                     onchange="updateCost(this.value, {{ $selectedTour->price }})"
                         id="quantity" name="quantity" min="1" max="{{ $selectedTour->num_of_participants }}"
                         value="1" />
-                    {{ trans('messages.date_start') }} <input type="date" id="start" name="trip-start"
+                    {{ trans('messages.date_start') }} <input type="date" id="start" name="dateStart"
                         value="{{ date('Y-d-m') }}" />
                     <p>{{ trans('messages.total') }} : <b><span id="total">${{ $selectedTour->price }}</span></b></p>
                     <div class="text-center">
-                        <div class="button">{{ trans('messages.booking') }}</div>
+                        <input type="submit" class="button" value="{{ trans('messages.payment') }}">
                     </div>
                 </form>
             </div>
@@ -39,6 +49,7 @@
 <script>
     function updateCost(count, price) {
         document.getElementById("total").innerHTML = count * price;
+        document.getElementById("totalPrice").value = count * price;
     }
 
 </script>

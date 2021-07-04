@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category_tour;
 use App\Models\CategoryTour;
 use Illuminate\Http\Request;
 

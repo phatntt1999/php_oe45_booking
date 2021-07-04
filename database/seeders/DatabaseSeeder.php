@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             CatTourSeeder::class,
-            TourSeeder::class
+            TourSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

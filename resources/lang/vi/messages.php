@@ -15,6 +15,7 @@ return [
     'duration' => 'Thời gian',
     'min_price' => 'Giá tối thiểu',
     'max_price' => 'Giá tối đa',
+    'price' => 'Giá',
     'search' => 'Tìm Kiếm',
     'get_started' => 'Chi Tiết',
     'hot_tour' => 'Tour Đang Hot',
@@ -107,5 +108,8 @@ return [
     'quantity' => 'Số lượng',
     'date_start' => 'Ngày khởi hành',
     'total' => 'Tổng tiền',
-    'booking' => 'XÁC NHẬN'
+    'booking' => 'XÁC NHẬN',
+    'payment' => 'Thanh Toán',
+    'day' => 'ngày',
+    'night' => 'đêm',
 ];

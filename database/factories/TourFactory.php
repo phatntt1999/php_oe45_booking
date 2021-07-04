@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Category_tour;
+use App\Models\CategoryTour;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Type\Integer;
@@ -28,7 +28,7 @@ class TourFactory extends Factory
             'description' => $this->faker->paragraph(),
             'duration' => rand(2, 7),
             'num_of_participants' => random_int(20, 50),
-            'cat_tour_id' => Category_tour::all()->random()->id,
+            'cat_tour_id' => CategoryTour::all()->random()->id,
             'rating' => rand(1, 5),
             'price' => rand(50, 500),
         ];

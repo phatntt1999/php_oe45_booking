@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category_review extends Model
+class LikeReview extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name-rv-cat',
+        'review-id',
+        'account-id',
+        'like-status',
     ];
 }
