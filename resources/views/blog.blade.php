@@ -46,7 +46,7 @@
 					@if (Route::has('login'))
 						@auth
 							<div class="add_form">
-								<a class="btn_add" href="{{ route('reviews.create') }}">
+								<a class="btn btn-primary" href="{{ route('reviews.create') }}">
 									ADD
 								</a>
 							</div>
