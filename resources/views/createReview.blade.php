@@ -6,17 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ asset("bower_components/bootstrap/dist/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/create-review.css") }}">
     {{-- CKEditor CDN --}}
     <script src="{{ asset("bower_components/ckeditor/ckeditor.js") }}"></script>
 </head>
 
 <body>
-    <h1>Them review</h1>
+    <h1 class="title">Them review</h1>
     <!-- Text Name input-->
     <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label class="col-md-4 control-label">State</label>
             <div class="col-md-4 selectContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fas fa-torii-gate"></i></span>
@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- Text Content input-->
         <div class="form-group">

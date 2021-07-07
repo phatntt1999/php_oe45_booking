@@ -51,5 +51,4 @@
         document.getElementById("total").innerHTML = count * price;
         document.getElementById("totalPrice").value = count * price;
     }
-
 </script>

@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="{{ mix('/assets/css/style2.css') }}">
 	<link rel="stylesheet" href="{{ mix('/assets/css/superfish.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ mix('assets/css/custom-heart.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/custom-heart.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/icomoon-bower/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('/bower_components/font-awesome/css/all.css') }}">
 

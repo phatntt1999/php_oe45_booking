@@ -31,7 +31,7 @@
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('/bower_components/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Page level plugins -->
-    <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script>
+    {{-- <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script> --}}
     <!-- Table Support plugins -->
     <script src="{{ asset('/bower_components/jquery.dataTables.min/index.js') }}"></script>
 
@@ -96,7 +96,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Utilities:</h6>
                         <a class="collapse-item" href="#">Tour Category</a>
-                        <a class="collapse-item" href="{{ route('tours.index') }}">Tour List</a>
+                        <a class="collapse-item" href="{{ route('admintours.index') }}">Tour List</a>
                     </div>
                 </div>
             </li>

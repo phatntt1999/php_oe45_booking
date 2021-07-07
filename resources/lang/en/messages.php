@@ -128,5 +128,7 @@ return [
     'reviews_0' => 'You dont have any reviews',
     'review_create' => 'Post has been created.',
     'domestic_travel' => 'Domestic Travel',
-    'national_travel' => 'National Travel'
+    'national_travel' => 'National Travel',
+    'per_info' => 'Personal Infor',
+    'profile' => 'Profile',
 ];

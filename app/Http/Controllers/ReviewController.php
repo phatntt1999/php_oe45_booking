@@ -43,6 +43,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $accountId = Auth::user()->id;
+
         $review = [
             "title"  =>  $request->titleReview,
             "content" => $request->contentReview,
