@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\CategoryTour;
 use App\Models\Image;
-use Illuminate\Http\Request;
 use App\Models\Tour;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ListTourController extends Controller
@@ -24,7 +25,7 @@ class ListTourController extends Controller
     public function index()
     {
         $authId = Auth::user()->name;
-        $tours = Tour::orderBy('created_at', 'asc')->get();
+        $tours = Tour::orderBy('created_at', 'asc')->paginate(config('app.default_paginate_tour_admin'));
 
         return view('admin.listTour', [
             'tours' => $tours,

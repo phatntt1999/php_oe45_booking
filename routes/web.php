@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ListTourController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\ListTourController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('language/{language}', [LanguageController::class, 'index'])->name('language');

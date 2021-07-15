@@ -230,5 +230,8 @@ return [
 
     ],
 
-    'image_tour' => 'assets/images/destinations/'
+    'image_tour' => 'assets/images/destinations/',
+    'default_paginate_tour_admin' => '10',
+    'default_paginate_category_admin' => '5',
+
 ];

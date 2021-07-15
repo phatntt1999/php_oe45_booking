@@ -10,9 +10,9 @@ class LikeReview extends Model
     use HasFactory;
 
     protected $fillable = [
-        'review-id',
-        'account-id',
-        'like-status',
+        'review_id',
+        'account_id',
+        'like_status',
     ];
 
     public function user()
