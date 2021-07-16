@@ -1,26 +1,20 @@
 @extends('layouts.admin')
 
-
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
-
 
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     @if (session('createSuccess'))
-    {{-- @include('common.error') --}}
     <div class="alert alert-success">
         <i class="fa fa-thumbs-up"></i>
         <h2>{{session('createSuccess')}}</h2>
     </div>
     @endif
-
 
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
@@ -70,7 +64,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- End of Main Content -->
 
@@ -78,7 +71,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -98,7 +90,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 </html>

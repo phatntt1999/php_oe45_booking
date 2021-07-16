@@ -11,10 +11,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__ . '/auth.php';
 
 Route::resource('tours', TourController::class)->only([
@@ -49,4 +45,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('profile', UserController::class)->only([
         'index', 'show', 'store', 'update',
     ]);
+
+    Route::post('reviews/upload', [ReviewController::class, 'uploadImageToDir'])
+        ->name('reviews.upload');
+
+    Route::get('/heart', [LikeController::class, 'Like'])->name('heart');
+
+    Route::resource('comments', CommentController::class)->only([
+        'index', 'show', 'store',
+    ])->middleware(['auth']);
 });

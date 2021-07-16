@@ -66,7 +66,9 @@ return [
     'reply' => 'Trả lời',
     'base_on' => 'Dựa trên',
     'reviews' => 'Đánh giá',
-    'reviews' => 'Đánh giá',
+    'review' => 'Đánh giá',
+    'about' => 'Giới thiệu',
+    'photos' => 'Hình ảnh',
     'about_travel' => 'Thông tin',
     'top_tour' => 'Tours đang hot',
     'interest' => 'Hấp dẫn',
@@ -82,4 +84,8 @@ return [
     'deleteSuccess' => 'Xóa thành công',
     'deleteFail' => 'Xóa thất bại',
     'updateSuccess' => 'Cập nhật thành công',
+    'quotes' => 'Chương trình đào tạo MCSE có những người ủng hộ và những người gièm pha.
+    Một số người không hiểu tại sao bạn phải chi tiền cho chương trình đào tạo khi
+    bạn có thể tự nhận tài liệu học MCSE với giá chỉ bằng một phần nhỏ của chương trình đào tạo.
+    Tuy nhiên, ai có đủ ý chí để thực sự ngồi qua một khóa đào tạo MCSE tự áp đặt.'
 ];

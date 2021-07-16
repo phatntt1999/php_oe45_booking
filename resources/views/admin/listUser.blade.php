@@ -6,11 +6,12 @@
 @endsection
 <!-- End of Sidebar -->
 
+
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
     @if (session('createSuccess'))
-    @include('common.error')
+    {{-- @include('common.error') --}}
     <div class="alert alert-success">
         <i class="fa fa-thumbs-up"></i>
         <h2>{{session('createSuccess')}}</h2>
@@ -19,66 +20,49 @@
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Tour List</h5>
+            <h5 class="m-0 font-weight-bold text-primary">User List</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <a href="{{ route('admintours.create') }}" class="btn btn-primary btn-icon-split btn-sm btn-add-new">
-                    <span class="icon">
-                        <i class="fas fa-plus-circle"></i>
-                    </span>
-                    <span class="text">Add new</span>
-                </a>
-                <table class="table table-bordered tour_location" id="dataTable" width="100%" cellspacing="0">
+                @include('common.checkSave')
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Duration</th>
-                            <th>Num.of participants</th>
-                            <th>Rating</th>
-                            <th>Prices</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Duration</th>
-                            <th>Num.of participants</th>
-                            <th>Rating</th>
-                            <th>Prices</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($tours as $tour)
+                        @foreach ($users as $user)
                         <tr>
-                            <td>{{ $tour->name }}</td>
-                            <td>{{ $tour->description }}</td>
-                            <td>{{ $tour->duration }}</td>
-                            <td>{{ $tour->num_of_participants }}</td>
-                            <td>{{ $tour->rating }}</td>
-                            <td>${{ $tour->price }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>
                             <td class="action-crud">
-                                <a href="{{ route('admintours.edit', ['admintour' => $tour->id]) }}"
-                                    class="btn btn-info btn-circle btn-edit">
+                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info btn-circle btn-edit">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form action="{{ route('admintours.destroy', ['admintour' => $tour->id ]) }}"
-                                    method="POST">
+                                <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
                         @endforeach
-                        {{ $tours->fragment('tour_location')->links() }}
                     </tbody>
                 </table>
             </div>

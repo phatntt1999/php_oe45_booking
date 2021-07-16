@@ -1,15 +1,14 @@
 @extends('layouts.admin')
-
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('admintours.store') }}" method="POST" enctype="multipart/form-data" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('admintours.store') }}" method="POST"
+        enctype="multipart/form-data" id="contact_form">
         @csrf
         {{-- {{ method_field('GET') }} --}}
 
@@ -84,7 +83,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-donate"></i></span>
-                        <input name="price" required placeholder=" Enter price of tour..." class="form-control" type="number">
+                        <input name="price" required placeholder=" Enter price of tour..." class="form-control"
+                            type="number">
                     </div>
                 </div>
             </div>
