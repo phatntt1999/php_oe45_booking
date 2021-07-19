@@ -3,13 +3,13 @@
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('categories.update', $cat_tour->id) }}" method="POST" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('categories.update', $cat_tour->id) }}" method="POST"
+        id="contact_form">
         @csrf
         {{ method_field('PUT') }}
 
@@ -23,8 +23,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fab fa-avianex"></i></span>
-                        <input name="name" required value="{{ $cat_tour->cat_name }}" placeholder="Category Name..." class="form-control"
-                            type="text">
+                        <input name="name" required value="{{ $cat_tour->cat_name }}" placeholder="Category Name..."
+                            class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,6 @@
         </fieldset>
     </form>
 </div>
-
 @endsection
 
 <!-- /.container -->

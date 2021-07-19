@@ -3,20 +3,19 @@
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
 
 @section('content')
 <div class="container-fluid">
-    <form class="well form-horizontal" action="{{ route('admintours.update', ['admintour' => $tour->id]) }}" method="POST" id="contact_form">
+    <form class="well form-horizontal" action="{{ route('admintours.update', ['admintour' => $tour->id]) }}"
+        method="POST" id="contact_form">
         @csrf
         {{ method_field('PUT') }}
 
         <fieldset>
             <!-- Form Name -->
             <legend>Edit Creation</legend>
-
             <div class="form-group">
                 <div class="col-md-4 selectContainer">
                     <div class="input-group">
@@ -33,7 +32,6 @@
             </div>
 
             <!-- Text Name input-->
-
             <div class="form-group">
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -45,7 +43,6 @@
             </div>
 
             <!-- Text area -->
-
             <div class="form-group">
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -68,7 +65,6 @@
             </div>
 
             <!-- Number input-->
-
             <div class="form-group">
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -80,7 +76,6 @@
             </div>
 
             <!-- Number input-->
-
             <div class="form-group">
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -99,11 +94,9 @@
                             class="glyphicon glyphicon-send"></span></button>
                 </div>
             </div>
-
         </fieldset>
     </form>
 </div>
 
 @endsection
-
 <!-- /.container -->

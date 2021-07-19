@@ -1,26 +1,20 @@
 @extends('layouts.admin')
-
-
 <!-- Sidebar -->
 @section('sidebar')
 @parent
-
 @endsection
 <!-- End of Sidebar -->
-
-
 @section('content')
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     @if (session('createSuccess'))
-            {{-- @include('common.error') --}}
-            <div class="alert alert-success">
-                <i class="fa fa-thumbs-up"></i>
-                <h2>{{session('createSuccess')}}</h2>
-            </div>
+    {{-- @include('common.error') --}}
+    <div class="alert alert-success">
+        <i class="fa fa-thumbs-up"></i>
+        <h2>{{session('createSuccess')}}</h2>
+    </div>
     @endif
-
 
     <!-- DataTales Table -->
     <div class="card shadow mb-4">
@@ -29,7 +23,6 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-
             </div>
         </div>
     </div>
@@ -61,7 +54,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 </html>
