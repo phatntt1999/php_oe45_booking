@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CategoryTour;
-use App\Models\Image;
-use App\Models\Tour;
+use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Tour\TourRepositoryInterface;
+use App\Repositories\TourCategory\CatTourRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ListTourController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('auth');
-        $this->middleware('role');
+    protected $tourRepo;
+    protected $catTourRepo;
+    protected $imageRepo;
+    public function __construct(
+        TourRepositoryInterface $tourRepo,
+        CatTourRepositoryInterface $catTourRepo,
+        ImageRepositoryInterface $imageRepo
+    ) {
+        $this->tourRepo = $tourRepo;
+        $this->catTourRepo = $catTourRepo;
+        $this->imageRepo = $imageRepo;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,12 +29,9 @@ class ListTourController extends Controller
      */
     public function index()
     {
-        $authId = Auth::user()->name;
-        $tours = Tour::orderBy('created_at', 'asc')->paginate(config('app.default_paginate_tour_admin'));
-
+        $tours = $this->tourRepo->sortAndPaginate('created_at', 'asc', config('app.default_paginate_tour'));
         return view('admin.listTour', [
             'tours' => $tours,
-            'authId' => $authId,
         ]);
     }
 
@@ -40,10 +42,10 @@ class ListTourController extends Controller
      */
     public function create()
     {
-        $catTour = CategoryTour::all();
+        $cat_tour = $this->catTourRepo->getAll();
 
         return view('admin.createTour', [
-            'cat_tour' => $catTour,
+            'cat_tour' => $cat_tour,
         ]);
     }
 
@@ -55,22 +57,36 @@ class ListTourController extends Controller
      */
     public function store(Request $request)
     {
-        $createTour = Tour::create($request->all());
+        $attributes = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'duration' => $request->duration,
+            'num_of_participants' => $request->numOfParticipants,
+            'cat_tour_id' => $request->cat_tour_id,
+            'price' => $request->price,
+        ];
+        $createTour = $this->tourRepo->create($attributes);
+
 
         if ($request->has('thumbnailTour')) {
             $thumbnail = $request->file('thumbnailTour');
-            $path = config('app.image_tour');
+            $path = 'assets/images/destinations/';
             $name = $thumbnail->getClientOriginalName();
             $storedPath = $thumbnail->move($path, $name);
 
-            Image::create([
+            $imageAttributes = [
                 'imageable_id' => $createTour->id,
                 'imageable_type' => 'tours',
                 'url' => $path . $name,
-            ]);
+            ];
+            $this->imageRepo->create($imageAttributes);
         }
 
-        return redirect()->route('admintours.index')->with('createSuccess', trans('messages.createSuccess'));
+        if ($createTour) {
+            return redirect()->route('admintours.index')->with('msg_success', trans('messages.save_sucess'));
+        }
+
+        return redirect()->route('admintours.index')->with('msg_fail', trans('messages.save_fail'));
     }
 
     /**
@@ -81,12 +97,12 @@ class ListTourController extends Controller
      */
     public function edit($id)
     {
-        $tour = Tour::find($id);
-        $catTour = CategoryTour::all();
+        $tour = $this->tourRepo->find($id);
+        $cat_tour = $this->catTourRepo->getAll();
 
         return view('admin.editTour', [
             'tour' => $tour,
-            'cat_tour' => $catTour,
+            'cat_tour' => $cat_tour,
         ]);
     }
 
@@ -99,16 +115,21 @@ class ListTourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tour = Tour::find($id);
-        $tour->name = $request->description;
-        $tour->description =  $request->description;
-        $tour->num_of_participants = $request->numOfParticipants;
-        $tour->duration = $request->duration;
-        $tour->cat_tour_id = $request->cat_tour_id;
-        $tour->price = $request->price;
-        $tour->save();
+        $tourAttributes = [
+            'name' => $request->name,
+            'description' =>  $request->description,
+            'num_of_participants' => $request->numOfParticipants,
+            'duration' => $request->duration,
+            'cat_tour_id' => $request->cat_tour_id,
+            'price' => $request->price,
+        ];
 
-        return redirect()->route('admintours.index')->with('updateSuccess', trans('messages.updateSuccess'));
+        $updateTour = $this->tourRepo->update($id, $tourAttributes);
+        if ($updateTour) {
+            return redirect()->route('admintours.index')->with('msg_success', trans('messages.save_sucess'));
+        }
+
+        return redirect()->route('admintours.index')->with('msg_fail', trans('messages.save_fail'));
     }
 
     /**
@@ -119,12 +140,16 @@ class ListTourController extends Controller
      */
     public function destroy($id)
     {
-        $deleteTour = Tour::find($id);
-        if ($deleteTour) {
-            $deleteTour->delete();
-            return redirect()->route('admintours.index')->with('deleteSuccess', trans('messages.deleteSuccess'));
-        } else {
-            return redirect()->route('admintours.index')->with('deleteFail', trans('messages.deleteFail'));
+        $deleteTour = false;
+        $tourImages = $this->tourRepo->find($id)->images->all();
+        $deleteTourImages = $this->imageRepo->deleteImage($tourImages);
+        if ($deleteTourImages) {
+            $deleteTour = $this->tourRepo->delete($id);
         }
+        if ($deleteTour) {
+            return redirect()->route('admintours.index')->with('msg_success', trans('messages.delete_sucess'));
+        }
+
+        return redirect()->route('admintours.index')->with('msg_failed', trans('messages.delete_fail'));
     }
 }

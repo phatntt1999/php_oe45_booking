@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CategoryTour;
+use App\Repositories\TourCategory\CatTourRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    protected $catTourRepo;
+    public function __construct(CatTourRepositoryInterface $catTourRepo)
     {
-        $this->middleware('role');
+        $this->catTourRepo = $catTourRepo;
     }
 
     /**
@@ -20,8 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $cat_tours = CategoryTour::orderBy('cat_name', 'asc')
-            ->paginate(config('app.default_paginate_category_admin'));
+        $cat_tours = $this->catTourRepo
+            ->sortAndPaginate('cat_name', 'asc', config('app.default_paginate_category_admin'));
 
         return view('admin.listCategory', compact('cat_tours'));
     }
@@ -45,14 +46,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
-        $check = CategoryTour::create([
+        $attributes = [
             'cat_name' => $name,
-        ]);
+        ];
+        $check = $this->catTourRepo->create($attributes);
         if ($check) {
-            return redirect()->route('category.create')->with('msg', trans('messages.save_sucess'));
+            return redirect()->route('category.create')->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return redirect()->route('category.create')->with('msg', trans('messages.save_fail'));
+        return redirect()->route('category.create')->with('msg_failed', trans('messages.save_fail'));
     }
 
     /**
@@ -63,7 +65,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $cat_tour = CategoryTour::find($id);
+        $cat_tour = $this->catTourRepo->find($id);
 
         return view('admin.editCategory', compact('cat_tour'));
     }
@@ -77,13 +79,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name = $request->name;
-        $category = CategoryTour::find($id);
-        $category->cat_name = $name;
-        if ($category->save()) {
-            return redirect()->route('category.index')->with('msg', trans('messages.save_sucess'));
+        $attributes = [
+            'cat_name' => $request->name,
+        ];
+        $updateCategory = $this->catTourRepo->update($id, $attributes);
+        if ($updateCategory->save()) {
+            return redirect()->route('category.index')->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return redirect()->route('category.index')->with('msg', trans('messages.save_fail'));
+        return redirect()->route('category.index')->with('msg_fail', trans('messages.save_fail'));
     }
 }
