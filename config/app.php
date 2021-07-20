@@ -233,5 +233,7 @@ return [
     'image_tour' => 'assets/images/destinations/',
     'default_paginate_tour_admin' => '10',
     'default_paginate_category_admin' => '5',
-
+    'default_paginate_tour' => '9',
+    'default_paginate_review' => '4',
+    'default_paginate_user' => '15',
 ];
