@@ -16,6 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.5",
         "squizlabs/php_codesniffer": "*"
     },
     "require-dev": {
@@ -24,7 +25,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {

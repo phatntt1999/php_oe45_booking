@@ -15,5 +15,6 @@
     "/assets/template/css/bookingForm.css": "/assets/template/css/bookingForm.css",
     "/assets/template/css/create-tour.css": "/assets/template/css/create-tour.css",
     "/assets/template/css/bootstrap.css": "/assets/template/css/bootstrap.css",
-    "/assets/template/css/user_profile.css": "/assets/template/css/user_profile.css"
+    "/assets/template/css/user_profile.css": "/assets/template/css/user_profile.css",
+    "/assets/system/css/tour.css": "/assets/system/css/tour.css"
 }

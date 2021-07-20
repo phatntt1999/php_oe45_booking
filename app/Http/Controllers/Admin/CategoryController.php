@@ -51,10 +51,10 @@ class CategoryController extends Controller
         ];
         $check = $this->catTourRepo->create($attributes);
         if ($check) {
-            return redirect()->route('category.create')->with('msg_success', trans('messages.save_sucess'));
+            return redirect()->route('categories.create')->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return redirect()->route('category.create')->with('msg_failed', trans('messages.save_fail'));
+        return redirect()->route('categories.create')->with('msg_failed', trans('messages.save_fail'));
     }
 
     /**
@@ -83,10 +83,10 @@ class CategoryController extends Controller
             'cat_name' => $request->name,
         ];
         $updateCategory = $this->catTourRepo->update($id, $attributes);
-        if ($updateCategory->save()) {
-            return redirect()->route('category.index')->with('msg_success', trans('messages.save_sucess'));
+        if ($updateCategory) {
+            return redirect()->route('categories.index')->with('msg_success', trans('messages.save_sucess'));
         }
 
-        return redirect()->route('category.index')->with('msg_fail', trans('messages.save_fail'));
+        return redirect()->route('categories.index')->with('msg_fail', trans('messages.save_fail'));
     }
 }
