@@ -36,16 +36,20 @@
                         <div class="d-flex justify-content-between mb-4">
                           <h2 class="mb-0 text-md">Revenue</h2>
                           <div class="form-group mb-0">
-                            {{-- <label for="barChartFilter" class="sr-only">Filter revenue</label>
+                            <label for="barChartFilter" class="sr-only">Filter revenue</label>
+
                             <select class="custom-select" id="barChartFilter">
                               <option disabled>Filter revenue</option>
-                              <option>Daily</option>
-                              <option>Weekly</option>
-                              <option selected>Monthly</option>
-                              <option>Yearly</option>
-                            </select> --}}
+                              <option value="weekly">Weekly</option>
+                              <option value="monthly" selected>Monthly</option>
+                              <option value="yearly">Yearly</option>
+                            </select>
+
                           </div> <!-- end of form-group -->
                         </div> <!-- end of d-flex -->
+                        <div>
+                          <canvas id="myChart"></canvas>
+                        </div>
                         <table class="table table-bordered" id="dataTable">
                           <thead>
                               <tr>
@@ -68,6 +72,7 @@
                                   </tr>
                           </tbody>
                         </table>
+
                       </div> <!-- end of card-body -->
                     </div> <!-- end of card -->
                   </div> <!-- end of col -->
@@ -194,6 +199,182 @@
         </div>
     </div>
 </div>
+{{-- <script>
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var datas = <?php echo json_encode($datas); ?>;
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          datasets: [{
+              label: 'Revenue',
+              data: datas,
+              backgroundColor: ['red', 'orange', 'blue', 'yellow', 'green', 'purple', 'beige', 'sliver', 'brown', 'pink', 'gray', 'black'],
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          }
+      }
+  });
+</script> --}}
+{{-- <script>
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var datas = <?php echo json_encode($datas); ?>;
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            datasets: [{
+                label: 'Revenue',
+                data: datas,
+                backgroundColor: ['red', 'orange', 'blue', 'yellow', 'green', 'purple', 'beige', 'sliver', 'brown', 'pink', 'gray', 'black'],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script> --}}
+{{-- <script>
+$('#barChartFilter').change(function(){
+    var x = document.getElementById("barChartFilter").value;
+    $.ajax({
+    type: "GET",
+    data: { filter: x },
+    url: "{{ route('revenue') }}",
+    success:function(){
+        var datas = <?php echo json_encode($datas); ?>;
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    label: 'Revenue',
+                    data: datas,
+                    backgroundColor: ['red', 'orange', 'blue', 'yellow', 'green', 'purple', 'beige', 'sliver', 'brown', 'pink', 'gray', 'black'],
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    });
+});
+</script> --}}
+//<script>
+// $('#barChartFilter').change(function(){
+//     var x = document.getElementById("barChartFilter").value;
+//     $.ajax({
+//         type: "GET",
+//         data: { filter: "a" },
+//         url: "{{ route('revenue') }}",
+//         success:function(data){
+
+//         alert(data.success);
+
+//         }
+        // success: function (response) {
+
+        //     var datas = json_encode(response);
+        //     var myChart = new Chart(ctx, {
+        //         type: 'bar',
+        //         data: {
+        //             datasets: [{
+        //                 label: 'Revenue',
+        //                 data: datas,
+        //                 backgroundColor: ['red', 'orange', 'blue', 'yellow', 'green', 'purple', 'beige', 'sliver', 'brown', 'pink', 'gray', 'black'],
+        //             }]
+        //         },
+        //         options: {
+        //             scales: {
+        //                 yAxes: [{
+        //                     ticks: {
+        //                         beginAtZero:true
+        //                     }
+        //                 }]
+        //             }
+        //         }
+        //     });
+        // },
+        // error: function(xhr) {
+        //     console.log(xhr.responseJSON);
+        // }
+//    });
+//</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  var ctx = document.getElementById("myChart").getContext('2d');
+    var datas = @json($datas);
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            datasets: [{
+                label: 'Revenue',
+                data: datas,
+                backgroundColor: ['#ECEAE4', '#FFC8A2', '#95DDDA', '#E7E34E', '#97C1A9', '#E3E8CD', '#F6EAC2', '#55CBCD', '#EA7369', 'pink', '#CBAACB', '#81D4FA'],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+  $('#barChartFilter').change(function(){
+        var x = document.getElementById("barChartFilter").value;
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    }
+});
+        $.ajax({
+        type: "GET",
+        url: "{{ route('chart') }}",
+        dataType: "json",
+        data:
+        {
+            filter: x,
+        },
+        success:function(response){
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = response;
+            myChart.update();
+
+        },
+        error: function(xhr) {
+        console.log(xhr.responseJSON);
+        }
+        });
+  })
+})
+    </script>
+
 
 @endsection
 

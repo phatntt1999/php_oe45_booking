@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
     <title>Admin Data</title>
@@ -24,17 +25,19 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('/assets/js/table-function.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('/bower_components/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('/bower_components/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Page level plugins -->
     {{-- <script src="{{ asset('/bower_components/dataTables.bootstrap4.min.js/index.js') }}"></script> --}}
     <!-- Table Support plugins -->
     <script src="{{ asset('/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js" integrity="sha512-5vwN8yor2fFT9pgPS9p9R7AszYaNn0LkQElTXIsZFCL7ucT8zDCAqlQXDdaqgA1mZP47hdvztBMsIoFxq/FyyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 
 </head>
 
@@ -56,7 +59,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('revenue') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -110,14 +113,21 @@
                 Action
             </div>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Revenue -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('processBooking') }}">
+                    <i class="fas fa-fw fa-border-style"></i>
+                    <span>Booking Request</span></a>
+            </li>
+
+            <!-- Nav Item - Revenue -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('revenue') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Revenue</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Homepage -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-table"></i>
@@ -190,7 +200,7 @@
                         </li> --}}
 
                         <!-- Nav Item - Alerts -->
-                        {{-- <li class="nav-item dropdown no-arrow mx-1">
+                        <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -203,40 +213,57 @@
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+
+                                @if (!empty(Auth::user()->notifications))
+                                <div class="notification" id="noti_content">
+                                    @foreach (Auth::user()->notifications as $notification)
+
+                                        <a class="dropdown-item d-flex align-items-center" href="{{ route('processBooking') }}">
+                                            <div class="mr-3">
+                                                <div class="icon-circle bg-warning">
+                                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500">December 2, 2019</div>
+                                                {{ $notification->data['content'] }}
+                                            </div>
+                                        </a>
+
+
+                                    @endforeach
+                                </div>
+                                @else
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                        <div>
+                                            <div class="small text-gray-500">There are no notification</div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                                    </a>
+                                @endif
+
+
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+                        {{-- <li class="nav-item dropdown no-arrow mx-1 dropdown-notifications">
+                            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                                <i data-count="0" class="fas fa-bell fa-fw notification-icon"></i>
+                            </a>
+
+                            <div class="dropdown-container dropdown-menu-right shadow animated--grow-in">
+                                <div class="dropdown-toolbar">
+                                    <div class="dropdown-toolbar-actions">
+                                        <a href="#">Mark all as read</a>
+                                    </div>
+                                    <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+                                </div>
+                                <ul class="dropdown-menu" style="position: relative;">
+                                </ul>
+                                <div class="dropdown-footer text-center">
+                                    <a href="#">View All</a>
+                                </div>
                             </div>
                         </li> --}}
 
@@ -345,13 +372,12 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
                 @yield('content')
             </div>
         </div>
 
-        <!-- Page level custom scripts -->
-        <script src="{{ asset('/assets/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/confirmBookingNotification.js') }}"></script>
+    <script src="{{ asset('/assets/js/sb-admin-2.min.js') }}"></script>
 
 </body>
 

@@ -16,7 +16,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function getUser()
     {
-        $user = Auth::user();
-        return $user;
+        return $user = Auth::user();;
+    }
+
+    public function getAdmin()
+    {
+        return $user = $this->model::where('role', 'admin')->first();;
     }
 }

@@ -24,6 +24,7 @@
         <ul class="profile-header-tab nav nav-tabs">
             <li class="nav-item"><a href="{{ route('profile.show',$user->id) }}" class="nav-link">{{ trans('messages.review') }}</a></li>
             <li class="nav-item"><a href="#profile-about" class="nav-link active show">{{ trans('messages.about') }}</a></li>
+            <li class="nav-item"><a href="{{ route('my-booking') }}" class="nav-link active show">{{ trans('messages.my_booking') }}</a></li>
         </ul>
     </div>
 </div>

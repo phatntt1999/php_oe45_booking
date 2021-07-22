@@ -1,13 +1,11 @@
 @extends('layouts.admin')
 
-
 <!-- Sidebar -->
 @section('sidebar')
 @parent
 
 @endsection
 <!-- End of Sidebar -->
-
 
 @section('content')
 <!-- Begin Page Content -->

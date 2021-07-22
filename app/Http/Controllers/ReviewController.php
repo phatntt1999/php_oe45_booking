@@ -24,7 +24,7 @@ class ReviewController extends Controller
         ReviewRepositoryInterface $reviewRepo,
         CatReviewRepositoryInterface $catReviewRepo,
         ImageRepositoryInterface $imageRepo,
-        LikeReviewRepositoryInterface $likeRepo,
+        LikeReviewRepositoryInterface $likeRepo
     ) {
         $this->reviewRepo = $reviewRepo;
         $this->catReviewRepo = $catReviewRepo;

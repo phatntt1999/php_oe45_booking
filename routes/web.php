@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingTourController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ListTourController;
 use App\Http\Controllers\Payment\CreatePaymentController;
@@ -13,7 +14,9 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HandleBookingRequest;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ManageBookingUserController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\ReviewManagementController;
 use App\Http\Controllers\UserManagementController;
@@ -62,6 +65,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('profile', UserController::class)->only([
         'index', 'show', 'store', 'update', 'edit'
     ]);
+
+    Route::get('/profile/my-booking', [ManageBookingUserController::class, 'index'])
+        ->name('my-booking');
 });
 
 
@@ -89,8 +95,26 @@ Route::middleware('role')->prefix('admin')->group(function () {
     Route::resource('/user', UserManagementController::class)->except([
         'show', 'store', 'create',
     ]);
-    Route::resource('/', AdminController::class)->only([
+    Route::resource('/', AdminController::class, ['name' => 'adminDashboard'])->only([
         'index',
     ]);
     Route::get('/revenue', [RevenueController::class, 'revenue'])->name('revenue');
+    Route::get('/revenue/chart', [ChartController::class, 'chart'])->name('chart');
+
+    Route::prefix('/booking-requests')->group(function () {
+        Route::get('/', [HandleBookingRequest::class, 'getBookingRequest'])
+            ->name('processBooking');
+        Route::get('/approve/{id}', [HandleBookingRequest::class, 'approveBookingRequest'])
+            ->name('approveBooking');
+        Route::get('/reject/{id}', [HandleBookingRequest::class, 'rejectBookingRequest'])
+            ->name('rejectBooking');
+    });
+});
+
+Route::get('/test', function () {
+    return view('testNotification');
+})->name('test');
+
+Route::get('getPusher', function () {
+    return view('testInputNotification');
 });

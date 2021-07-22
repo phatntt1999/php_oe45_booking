@@ -87,7 +87,8 @@ return [
     'new_pass' => 'New Password',
     'upload' => 'Upload photo',
     'personal_info' => 'PERSONAL INFORMATION',
-    'about' => 'ABOUT',
+    'about' => 'About',
+    'my_booking' => 'My Booking',
     'confirm_pass' => 'Confirm Password',
     'edit_proflie' => 'Edit profile',
     'cancel' => 'Cancel',
@@ -141,4 +142,6 @@ return [
     should have to spend money on boot camp when you can get the MCSE study materials yourself at
     a fraction of the camp price. However, who has the willpower to actually sit through a
     self-imposed MCSE training.',
+    'approved_booking_request' => 'The booking request was approved and would be notified to customer',
+    'rejected_booking_request' => 'The booking request was rejected and would be notified to customer',
 ];
